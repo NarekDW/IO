@@ -5,19 +5,19 @@ import java.util.Arrays;
 /**
  * Created by Narek on 28.01.2017.
  */
-class SimpleMap {
+public class SimpleMap {
     private int length;
     private Map[] wordsAndAmount = new Map[length];
 
-    SimpleMap(int length){
+    public SimpleMap(int length){
         assert length >= 0;
         this.length = length;
     }
-    SimpleMap(){
+    public SimpleMap(){
         this(0);
     }
 
-    void add(String word){
+    public void add(String word){
         for (Map waa : wordsAndAmount) {
             if (waa == null) break;
             if (isContains(waa, word)) return;
@@ -48,11 +48,11 @@ class SimpleMap {
     }
 
     private class Map{
+        String word;
+        int amount = 1;
         Map(String word){
             this.word = word;
         }
-        String word;
-        int amount = 1;
 
         @Override
         public String toString(){

@@ -7,19 +7,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Narek on 27.01.2017.
  */
-public class ReadWriteStreams {
-    private static final String KEYWORDS =
-                    "(abstract|continue|for|new|switch|" +
-                    "assert|default|goto|package|synchronized|" +
-                    "boolean|do|if|private|this|" +
-                    "break|double|implements|protected|throw|" +
-                    "byte|else|import|public|throws|" +
-                    "case|enum|instanceof|return|transient|" +
-                    "catch|extends|int|short|try|" +
-                    "char|final|interface|static|void|" +
-                    "class|finally|long|strictfp|volatile|" +
-                    "const|float|native|super|while)[^\\w]";
-
+public class ByteStreams {
     private StringBuilder text = new StringBuilder();
 
     public void readFromFile(File file){
@@ -40,7 +28,7 @@ public class ReadWriteStreams {
     public void writeToFile(File file){
         try(BufferedOutputStream bout = new BufferedOutputStream(
                 new FileOutputStream(file))) {
-            Pattern p = Pattern.compile(KEYWORDS);
+            Pattern p = Pattern.compile(Const.KEYWORDS);
             Matcher m = p.matcher(text);
             while(m.find())
                 result.add(m.group(1));
@@ -54,9 +42,9 @@ public class ReadWriteStreams {
     }
 
     public static void main(String[] args) throws IOException {
-        ReadWriteStreams rws = new ReadWriteStreams();
-        rws.readFromFile(new File("C:/Users/Narek/workspace/OOP/" +
+        ByteStreams bs = new ByteStreams();
+        bs.readFromFile(new File("C:/Users/Narek/workspace/OOP/" +
                 "Homework/src/main/java/com/epam/courses/oop/t01/Pen.java"));
-        rws.writeToFile(new File("data.txt"));
+        bs.writeToFile(new File("data.txt"));
     }
 }
