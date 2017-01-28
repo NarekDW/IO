@@ -1,0 +1,11 @@
+package - 1
+public - 5
+class - 1
+private - 4
+double - 11
+this - 15
+if - 12
+return - 22
+boolean - 2
+else - 1
+int - 2
