@@ -18,9 +18,9 @@ class SimpleMap {
     }
 
     void add(String word){
-        for(int i=0; i<wordsAndAmount.length; i++){
-            if(wordsAndAmount[i]==null) break;
-            if(isContains(wordsAndAmount[i], word)) return;
+        for (Map waa : wordsAndAmount) {
+            if (waa == null) break;
+            if (isContains(waa, word)) return;
         }
         addNew(word);
     }
@@ -28,14 +28,13 @@ class SimpleMap {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        for(int i=0; i<wordsAndAmount.length; i++){
-            sb.append(wordsAndAmount[i]);
-        }
+        for (Map waa : wordsAndAmount)
+            sb.append(waa);
         return sb.toString();
     }
 
     private boolean isContains(Map initial, String check){
-        if(initial.word.equals(check)){
+        if(initial.equals(check)){
             initial.amount+=1;
             return true;
         }
@@ -58,6 +57,10 @@ class SimpleMap {
         @Override
         public String toString(){
             return word+" - "+amount+"\n";
+        }
+        @Override
+        public boolean equals(Object obj){
+            return word.equals(obj);
         }
     }
 

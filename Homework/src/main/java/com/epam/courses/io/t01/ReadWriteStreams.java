@@ -20,28 +20,37 @@ public class ReadWriteStreams {
                     "class|finally|long|strictfp|volatile|" +
                     "const|float|native|super|while)[^\\w]";
 
-    private FileInputStream fin;
-    private FileOutputStream fout;
     private StringBuilder text = new StringBuilder();
 
-    public void readFromFile(File file) throws IOException {
-        fin = new FileInputStream(file);
-        int i;
-        while((i = fin.read())!=-1)
-            text.append((char)i);
-        fin.close();
+    public void readFromFile(File file){
+        try(BufferedInputStream bin = new BufferedInputStream
+                (new FileInputStream(file))) {
+            int i;
+            while((i = bin.read())!=-1)
+                text.append((char)i);
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found for read "+e);
+        } catch (IOException e) {
+            System.err.println("Read exception from file "+e);
+        }
     }
 
     private SimpleMap result = new SimpleMap();
 
-    public void writeToFile(File file) throws IOException {
-        fout = new FileOutputStream(file);
-        Pattern p = Pattern.compile(KEYWORDS);
-        Matcher m = p.matcher(text);
-        while(m.find())
-            result.add(m.group(1));
-        fout.write(result.toString().getBytes());
-        fout.close();
+    public void writeToFile(File file){
+        try(BufferedOutputStream bout = new BufferedOutputStream(
+                new FileOutputStream(file))) {
+            Pattern p = Pattern.compile(KEYWORDS);
+            Matcher m = p.matcher(text);
+            while(m.find())
+                result.add(m.group(1));
+            bout.write(result.toString().getBytes());
+            bout.flush();
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found for write "+e);
+        } catch (IOException e) {
+            System.err.println("Write exception to file "+e);
+        }
     }
 
     public static void main(String[] args) throws IOException {
