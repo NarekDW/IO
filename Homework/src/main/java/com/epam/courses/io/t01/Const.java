@@ -1,9 +1,13 @@
 package com.epam.courses.io.t01;
 
 /**
- * Created by Narek on 28.01.2017.
+ * Date: 28.01.2017
+ * @author Karapetyan N.K
  */
 public abstract class Const {
+    /**
+     * @param KEYWORDS  - это regex всех зарезервированных языком Java слов.
+     * */
     public static final String KEYWORDS =
             "(abstract|continue|for|new|switch|" +
                     "assert|default|goto|package|synchronized|" +

@@ -5,16 +5,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Narek on 27.01.2017.
+ * Date: 27.01.2017
+ * @author Karapetyan N.K
  */
 public class ByteStreams {
     private StringBuilder text = new StringBuilder();
 
-    public void readFromFile(File file){
-        try(BufferedInputStream bin = new BufferedInputStream
+    public void readFromFile(File file){ // Байтовое чтение из файла
+        try(BufferedInputStream input = new BufferedInputStream
                 (new FileInputStream(file))) {
             int i;
-            while((i = bin.read())!=-1)
+            while((i = input.read())!=-1)
                 text.append((char)i);
         } catch (FileNotFoundException e) {
             System.err.println("File not found for read "+e);
@@ -23,17 +24,17 @@ public class ByteStreams {
         }
     }
 
-    private SimpleMap result = new SimpleMap();
+    private SimpleMap result = new SimpleMap(); // Структура: Слово - кол-во вхождений
 
-    public void writeToFile(File file){
-        try(BufferedOutputStream bout = new BufferedOutputStream(
+    public void writeToFile(File file){ // Байтовая запись в файл
+        try(BufferedOutputStream output = new BufferedOutputStream(
                 new FileOutputStream(file))) {
-            Pattern p = Pattern.compile(Const.KEYWORDS);
+            Pattern p = Pattern.compile(Const.KEYWORDS); // Вытаскиваем только ключевые слова Java
             Matcher m = p.matcher(text);
             while(m.find())
                 result.add(m.group(1));
-            bout.write(result.toString().getBytes());
-            bout.flush();
+            output.write(result.toString().getBytes());
+            output.flush();
         } catch (FileNotFoundException e) {
             System.err.println("File not found for write "+e);
         } catch (IOException e) {

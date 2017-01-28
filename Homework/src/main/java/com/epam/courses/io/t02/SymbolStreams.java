@@ -8,7 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by Narek on 28.01.2017.
+ * Date: 28.01.2017
+ * @author Karapetyan N.K
  */
 public class SymbolStreams {
 
@@ -16,16 +17,17 @@ public class SymbolStreams {
     private SimpleMap result = new SimpleMap();
 
     public void readAndWrite(File r, File w) {
-        try(BufferedReader bin = new BufferedReader(new FileReader(r));
-            PrintWriter pout = new PrintWriter(w)){
+        try(BufferedReader input = new BufferedReader(new FileReader(r));
+            PrintWriter output = new PrintWriter(w)) {
             String str;
-            while((str = bin.readLine())!=null)
+            while((str = input.readLine())!=null)
                 text.append(str).append("\n");
             Pattern p = Pattern.compile(Const.KEYWORDS);
             Matcher m = p.matcher(text);
             while(m.find())
                 result.add(m.group(1));
-            pout.print(result.toString());
+            output.print(result.toString());
+            output.flush();
         } catch (FileNotFoundException e) {
             System.err.println("File not found "+e);
         } catch (IOException e) {

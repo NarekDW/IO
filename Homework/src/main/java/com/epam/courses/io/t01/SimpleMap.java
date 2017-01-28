@@ -3,11 +3,18 @@ package com.epam.courses.io.t01;
 import java.util.Arrays;
 
 /**
- * Created by Narek on 28.01.2017.
+ * Date: 28.01.2017
+ * <p>
+ *     Простое представление структуры данных Карта.
+ *     Ключ - слов, значение - кол-во повторений этого слова.
+ * </p>
+ * @see java.util.Map
+ * @see java.util.ArrayList
+ * @author Karapetyan N.K
  */
 public class SimpleMap {
     private int length;
-    private Map[] wordsAndAmount = new Map[length];
+    private Map[] wordsAndAmount = new Map[length]; // Приватный внутренний класс
 
     public SimpleMap(int length){
         assert length >= 0;
@@ -22,7 +29,7 @@ public class SimpleMap {
             if (waa == null) break;
             if (isContains(waa, word)) return;
         }
-        addNew(word);
+        addNew(word); // Метод увеличивает массив на 1 и добавляет новое слово
     }
 
     @Override
