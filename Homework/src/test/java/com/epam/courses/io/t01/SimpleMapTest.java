@@ -6,7 +6,8 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 /**
- * Created by Narek on 28.01.2017.
+ * Date: 28.01.2017
+ * @author Karapetyan N.K
  */
 public class SimpleMapTest {
     private SimpleMap smap = new SimpleMap();
